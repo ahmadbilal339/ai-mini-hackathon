@@ -1,70 +1,169 @@
-# AI Study Notes Generator
+# TaskSum
 
-A small hackathon project that helps students turn a topic or study material into concise notes and practice questions using Google Gemini.
+TaskSum is a lightweight AI-powered task management application. It allows users to add and complete daily tasks, then generates a concise one-paragraph summary of their completed work.
 
-## Description
-
-Enter a topic or paste study material. The app generates a summary, key points, and 3–5 quiz questions to support quick review and self-testing.
+This project was developed collaboratively during the **Group AI Mini Hackathon** using a specification-first and incremental development approach.
 
 ## MVP Features
 
-1. **User input** — Enter a topic or study material (plain text).
-2. **Summary & key points** — AI-generated concise summary and important key points.
-3. **Quiz questions** — 3–5 quiz questions with answers based on the input.
+- Add daily tasks through a simple web interface.
+- View and track task completion.
+- Generate an AI-powered summary of completed tasks.
+- Display user-friendly messages when the backend or AI service is unavailable.
 
 ## Tech Stack
 
-- **Backend:** Python, FastAPI, Pydantic
-- **Frontend:** Streamlit
-- **AI:** Google Gemini API (`google-genai`)
-- **Other:** `python-dotenv`, `requests`, `uvicorn`
-
-See [SPEC.md](SPEC.md) for full requirements and architecture.
+| Area | Technology |
+|---|---|
+| Frontend | Streamlit |
+| Backend | FastAPI |
+| Validation | Pydantic |
+| AI Integration | Google Gemini (`google-genai`) |
+| API Communication | Requests |
+| Environment Management | `python-dotenv` |
+| Language | Python |
 
 ## Project Structure
 
-```
+```text
 ai-mini-hackathon/
-├── backend/          # FastAPI application (to be implemented)
-├── frontend/         # Streamlit application (to be implemented)
-├── SPEC.md           # Project specification
-├── .env.example      # Environment variable template
+├── backend/
+│   ├── llm.py
+│   ├── main.py
+│   └── models.py
+├── frontend/
+│   └── app.py
+├── assets/
+│   └── demo.png
+├── .env.example
 ├── .gitignore
+├── README.md
 ├── requirements.txt
-└── README.md
+└── SPEC.md
 ```
 
-## Environment Setup
+## Setup Instructions
 
-1. Copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
-2. Set your Gemini API key in `.env`:
-   ```
-   GEMINI_API_KEY=your_api_key_here
-   ```
-
-## Install Dependencies
+### 1. Clone the repository
 
 ```bash
-python -m venv .venv
-# Activate .venv (platform-specific)
+git clone https://github.com/ahmadbilal339/ai-mini-hackathon.git
+cd ai-mini-hackathon
+```
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv myenv
+```
+
+Activate it on Windows CMD:
+
+```bat
+myenv\Scripts\activate
+```
+
+Activate it on Windows PowerShell:
+
+```powershell
+.\myenv\Scripts\Activate.ps1
+```
+
+Activate it on macOS/Linux:
+
+```bash
+source myenv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Run (placeholder — not yet implemented)
+### 4. Configure environment variables
 
-**Backend** (from project root, once implemented):
+Create a local `.env` file from `.env.example`.
 
-```bash
-uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
+Windows CMD:
+
+```bat
+copy .env.example .env
 ```
 
-**Frontend** (from project root, once implemented):
+macOS/Linux:
+
+```bash
+cp .env.example .env
+```
+
+Open `.env` and provide the required Google Gemini API key using the variable name defined in `.env.example`. Never commit the `.env` file.
+
+## Run the Application
+
+### 1. Start the FastAPI backend
+
+```bash
+uvicorn backend.main:app --reload
+```
+
+The backend will run at:
+
+```text
+http://localhost:8000
+```
+
+Interactive API documentation is available at:
+
+```text
+http://localhost:8000/docs
+```
+
+### 2. Start the Streamlit frontend
+
+Open a second terminal, activate the virtual environment, and run:
 
 ```bash
 streamlit run frontend/app.py
 ```
 
-> Application code is not implemented yet. This setup phase includes project structure, specification, and configuration files only.
+The frontend will normally open at:
+
+```text
+http://localhost:8501
+```
+
+Keep both terminals running while using the application.
+
+## How to Use
+
+1. Start the backend and frontend.
+2. Enter a task and select **Add**.
+3. Mark tasks as completed.
+4. Select **Summarize completed tasks** to generate the daily summary.
+
+## Demo
+
+![TaskSum application demo](assets/demo.png)
+
+## QA Checks Performed
+
+- Python syntax compilation completed successfully for the backend and frontend.
+- FastAPI health endpoint returned a healthy response.
+- Streamlit frontend started successfully.
+- Frontend displayed an error message when the backend was stopped.
+- `.env` was confirmed as ignored by Git.
+- Python virtual environments, cache files, IDE files, logs, and secrets are excluded through `.gitignore`.
+
+## Team Members
+
+| Name | Role | GitHub |
+|---|---|---|
+| Muhammad Iqbal Shahzad | Product & Prompt Lead | [@Iqbalshahzad96](https://github.com/Iqbalshahzad96) |
+| Jazib Faisal | Backend & AI Engineer | [@jazibfaisal4](https://github.com/jazibfaisal4) |
+| Ammaduddin Ahmad | Frontend & UX Lead | [@amaduddinahmad1](https://github.com/amaduddinahmad1) |
+| Ahmad Bilal | QA & Git Lead | [@ahmadbilal339](https://github.com/ahmadbilal339) |
+
+## Repository
+
+[GitHub Repository](https://github.com/ahmadbilal339/ai-mini-hackathon)
