@@ -1,7 +1,9 @@
 fastapi
-uvicorn
+uvicorn[standard]
 streamlit
 google-genai
 python-dotenv
 requests
 pydantic
+pytest
+httpx
